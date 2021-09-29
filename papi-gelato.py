@@ -4,6 +4,9 @@ totaalHoorntjes = 0
 TotaleBolletjes = 0
 Besteldesmakenlijst = []
 BestaandeSmaken = ["aardbei", "a", "chocolade", "c", "munt", "m", "vanille", "v"]
+prijsPerBakje = 0.75
+prijsPerHoorntje = 1.25
+prijsPerBolletje = 1.10
 
 print("Welkom bij Papi Gelato.")
 
@@ -63,13 +66,25 @@ while herhalen == "y":
     bakjeOfHoorntje = WatVoorVerpakking()
     if bakjeOfHoorntje != "ERROR":
         herhalen = nogEenKeer()
-    else:
         TotaleBolletjes += aantal
         if bakjeOfHoorntje == "bakje":
-            TotaalBakjes += 1
+            
+            TotaalBakjes = TotaalBakjes + 1
         elif bakjeOfHoorntje == "hoorntje":
-            totaalHoorntjes += 1
+            totaalHoorntjes = totaalHoorntjes + 1
         else:
             print("An Error occurred, please try again")
+    else:
 
         print("")
+
+print('---------["Papi Gelato"]---------')
+print("")
+if TotaleBolletjes >= 1:
+    print("Bolletje(s)    "+ str(TotaleBolletjes)+ " X " + "€" + str(round(float(TotaleBolletjes) * prijsPerBolletje,2)))
+
+if totaalHoorntjes >= 1:
+    print("Hoorntje(s)    "+ str(totaalHoorntjes)+ " X " + "€" + str(round(float(totaalHoorntjes) * prijsPerHoorntje,2)))
+
+if TotaalBakjes >= 1:
+    print("Bakje(s)       "+ str(TotaalBakjes)+ " X " + "€" + str(round(float(TotaalBakjes) * prijsPerBakje,2)))
