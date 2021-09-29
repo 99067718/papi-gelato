@@ -2,8 +2,23 @@ herhalen = "y"
 TotaalBakjes = 0
 totaalHoorntjes = 0
 TotaleBolletjes = 0
+Besteldesmakenlijst = []
+BestaandeSmaken = ["aardbei", "a", "chocolade", "c", "munt", "m", "vanille", "v"]
 
 print("Welkom bij Papi Gelato je mag alle smaken kiezen zolang het maar vanille ijs is.")
+
+def smaak():
+    print("Welke smaak wilt u hebben?")
+    print("Aardbei(A), Chocolade(C), Munt(M) of Vanille(V)")
+    returnsInLoop = 1
+    while returnsInLoop != aantal + 1:
+        smaak = input("Welke smaak wilt U hebben voor uw "+ str(returnsInLoop) + "e bolletje?").lower()
+        if smaak in BestaandeSmaken:
+            returnsInLoop += 1
+            Besteldesmakenlijst.append(smaak)
+        else:
+            print("Sorry, maar dat begrijp ik niet, probeer het opnieuw.")
+
 
 def aantalbolletjes():
     aantalBolletjesijs = int(input("Hoe veel bolletjes ijs wil je?: "))
@@ -36,6 +51,7 @@ def keuzeBakjeOfHoorntje():
     return soort
 
 def nogEenKeer():
+    smaak()
     print("Hier is uw", bakjeOfHoorntje, "met", aantal, "bolletje(s)")
     overnieuw = input("Wilt u nog wat bestellen?(Y/N): ").lower()
     return overnieuw
