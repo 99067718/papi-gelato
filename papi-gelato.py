@@ -5,7 +5,7 @@ TotaleBolletjes = 0
 Besteldesmakenlijst = []
 BestaandeSmaken = ["aardbei", "a", "chocolade", "c", "munt", "m", "vanille", "v"]
 
-print("Welkom bij Papi Gelato je mag alle smaken kiezen zolang het maar vanille ijs is.")
+print("Welkom bij Papi Gelato.")
 
 def smaak():
     print("Welke smaak wilt u hebben?")
