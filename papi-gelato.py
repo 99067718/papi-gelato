@@ -2,13 +2,52 @@ herhalen = "y"
 TotaalBakjes = 0
 totaalHoorntjes = 0
 TotaleBolletjes = 0
+
 Besteldesmakenlijst = []
 BestaandeSmaken = ["aardbei", "a", "chocolade", "c", "munt", "m", "vanille", "v"]
+
+toppings = []
+aantalToppings = 0
+bestaandeToppings = ["sl", "slagroom", "sp", "sprinkels", "c", "caramel"]
+toppingKosten = 0.00
+
 prijsPerBakje = 0.75
 prijsPerHoorntje = 1.25
 prijsPerBolletje = 1.10
 
 print("Welkom bij Papi Gelato.")
+
+
+def topping():
+    
+    
+        toppingKeuze = input("Wat voor topping wilt u: (G) Geen, (Sl) Slagroom, (Sp) Sprinkels of (C) Caramel Saus?: ").lower()
+        if toppingKeuze == "g":
+            print("")
+            
+        elif toppingKeuze in bestaandeToppings:
+            
+            toppings.append(toppingKeuze)
+            global aantalToppings
+            global toppingKosten
+            aantalToppings += 1
+
+            if toppingKeuze == "sl" or "slagroom":
+                
+                toppingKosten += 0.50
+            elif toppingKeuze == "sp" or "sprinkels":
+                
+                toppingKosten += 0.30
+            elif toppingKeuze == "c" or "caramel":
+                if bakjeOfHoorntje == "bakje":
+                    
+                    toppingKosten += 0.90
+                elif bakjeOfHoorntje == "hoorntje":
+            
+                    toppingKosten += 0.60
+
+        else:
+            print("Vul een bestaande topping in.")
 
 def smaak():
     print("Welke smaak wilt u hebben?")
@@ -19,6 +58,7 @@ def smaak():
         if smaak in BestaandeSmaken:
             returnsInLoop += 1
             Besteldesmakenlijst.append(smaak)
+            topping()
         else:
             print("Sorry, maar dat begrijp ik niet, probeer het opnieuw.")
 
@@ -88,3 +128,13 @@ if totaalHoorntjes >= 1:
 
 if TotaalBakjes >= 1:
     print("Bakje(s)       "+ str(TotaalBakjes)+ " X " + "€" + str(round(float(TotaalBakjes) * prijsPerBakje,2)))
+
+if aantalToppings >= 1:
+    print("topping(s)     "+ str(aantalToppings)+ " X " + "€" + str(round(toppingKosten,2)))
+
+
+print("                   ----- +")
+totaalprijs = float(totaalHoorntjes) * prijsPerHoorntje + float(TotaalBakjes) * prijsPerBakje + TotaleBolletjes * prijsPerBolletje
+totaal2 = round(float(totaalprijs),2)
+
+print("Totaal"+ "              "+ "€" + str(totaal2))
