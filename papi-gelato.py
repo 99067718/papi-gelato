@@ -10,12 +10,12 @@ particulier = "...."
 
 #------Zakelijk------#
 Liters_ijs = 0
-Btw = 9
+Btw = 6
 prijsPerLiter = 9.80
 #-----------------------#
 
 Besteldesmakenlijst = []
-BestaandeSmaken = ["aardbei", "a", "chocolade", "c", "munt", "m", "vanille", "v"]
+BestaandeSmaken = ["aardbei", "a", "chocolade", "c", "vanille", "v"]
 
 toppings = []
 aantalToppings = 0
@@ -24,11 +24,12 @@ toppingKosten = 0.00
 
 prijsPerBakje = 0.75
 prijsPerHoorntje = 1.25
-prijsPerBolletje = 1.10
+prijsPerBolletje = 0.95
 
 print("Welkom bij Papi Gelato.")
 
-
+def WrongAnswer():
+    print("Sorry dat is geen optie die we aanbieden...")
 
 def AantalLiter():
     global Liters_ijs
@@ -63,17 +64,17 @@ def topping():
                     toppingKosten += 0.60
 
         else:
-            print("Vul een bestaande topping in.")
+            WrongAnswer()
 
 def ParticulierSmaak():
     print("Welke smaak wilt u hebben?")
-    print("Aardbei(A), Chocolade(C), Munt(M) of Vanille(V)")
+    print("Aardbei(A), Chocolade(C) of Vanille(V)")
     smaak = input("Welke smaak ijs wilt U?")
 
 
 def smaak():
     print("Welke smaak wilt u hebben?")
-    print("Aardbei(A), Chocolade(C), Munt(M) of Vanille(V)")
+    print("Aardbei(A), Chocolade(C) of Vanille(V)")
     returnsInLoop = 1
     while returnsInLoop != aantal + 1:
         smaak = input("Welke smaak wilt U hebben voor uw "+ str(returnsInLoop) + "e bolletje?").lower()
@@ -82,7 +83,7 @@ def smaak():
             Besteldesmakenlijst.append(smaak)
             
         else:
-            print("Sorry, maar dat begrijp ik niet, probeer het opnieuw.")
+            WrongAnswer()
 
 
 def aantalbolletjes():
@@ -102,7 +103,7 @@ def WatVoorVerpakking():
         waarin = "ERROR"
       
     else:
-        print("Fill in a number above zero.")
+        WrongAnswer()
         waarin = "ERROR"
        
     return waarin
@@ -133,7 +134,7 @@ while repeat == True:
         herhalen = "n"
         repeat = False
     else:
-        print("Sorry maar dat begrijp ik niet.")
+        WrongAnswer()
         repeat = True
 
 
@@ -151,7 +152,7 @@ while herhalen == "y":
         elif bakjeOfHoorntje == "hoorntje":
             totaalHoorntjes = totaalHoorntjes + 1
         else:
-            print("An Error occurred, please try again")
+            WrongAnswer()
     else:
 
         print("")
