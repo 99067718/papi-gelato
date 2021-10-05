@@ -1,7 +1,18 @@
+from os import truncate
+
+
 herhalen = "y"
+repeat = True
 TotaalBakjes = 0
 totaalHoorntjes = 0
 TotaleBolletjes = 0
+particulier = "...."
+
+#------Zakelijk------#
+Liters_ijs = 0
+Btw = 9
+prijsPerLiter = 9.80
+#-----------------------#
 
 Besteldesmakenlijst = []
 BestaandeSmaken = ["aardbei", "a", "chocolade", "c", "munt", "m", "vanille", "v"]
@@ -17,6 +28,11 @@ prijsPerBolletje = 1.10
 
 print("Welkom bij Papi Gelato.")
 
+
+
+def AantalLiter():
+    global Liters_ijs
+    Liters_ijs = int(input("Hoeveel liter ijs wilt U bestellen?: "))
 
 def topping():
     
@@ -49,6 +65,12 @@ def topping():
         else:
             print("Vul een bestaande topping in.")
 
+def ParticulierSmaak():
+    print("Welke smaak wilt u hebben?")
+    print("Aardbei(A), Chocolade(C), Munt(M) of Vanille(V)")
+    smaak = input("Welke smaak ijs wilt U?")
+
+
 def smaak():
     print("Welke smaak wilt u hebben?")
     print("Aardbei(A), Chocolade(C), Munt(M) of Vanille(V)")
@@ -58,7 +80,7 @@ def smaak():
         if smaak in BestaandeSmaken:
             returnsInLoop += 1
             Besteldesmakenlijst.append(smaak)
-            topping()
+            
         else:
             print("Sorry, maar dat begrijp ik niet, probeer het opnieuw.")
 
@@ -95,12 +117,28 @@ def keuzeBakjeOfHoorntje():
 
 def nogEenKeer():
     smaak()
+    topping()
     print("Hier is uw", bakjeOfHoorntje, "met", aantal, "bolletje(s)")
     overnieuw = input("Wilt u nog wat bestellen?(Y/N): ").lower()
     return overnieuw
 
+while repeat == True:
+    Soort = input("Bent u Particulier (P) of zakelijk (Z)?: ").lower()
+    if Soort == "p" or Soort == "particulier":
+        herhalen = "y"
+        particulier = "ja"
+        repeat = False
+    elif Soort == "z" or Soort =="zakelijk":
+        particulier = "nee"
+        herhalen = "n"
+        repeat = False
+    else:
+        print("Sorry maar dat begrijp ik niet.")
+        repeat = True
+
 
 while herhalen == "y":
+    
     aantal = aantalbolletjes()
 
     bakjeOfHoorntje = WatVoorVerpakking()
@@ -118,23 +156,39 @@ while herhalen == "y":
 
         print("")
 
-print('---------["Papi Gelato"]---------')
-print("")
-if TotaleBolletjes >= 1:
-    print("Bolletje(s)    "+ str(TotaleBolletjes)+ " X " + "€" + str(round(float(TotaleBolletjes) * prijsPerBolletje,2)))
+if particulier == "nee":
+    Litersijs = AantalLiter()
+    ParticulierSmaak()
 
-if totaalHoorntjes >= 1:
-    print("Hoorntje(s)    "+ str(totaalHoorntjes)+ " X " + "€" + str(round(float(totaalHoorntjes) * prijsPerHoorntje,2)))
+if particulier == "ja":
+    print('---------["Papi Gelato"]---------')
+    print("")
+    if TotaleBolletjes >= 1:
+        print("Bolletje(s)    "+ str(TotaleBolletjes)+ " X " + "€" + str(round(float(TotaleBolletjes) * prijsPerBolletje,2)))
 
-if TotaalBakjes >= 1:
-    print("Bakje(s)       "+ str(TotaalBakjes)+ " X " + "€" + str(round(float(TotaalBakjes) * prijsPerBakje,2)))
+    if totaalHoorntjes >= 1:
+        print("Hoorntje(s)    "+ str(totaalHoorntjes)+ " X " + "€" + str(round(float(totaalHoorntjes) * prijsPerHoorntje,2)))
 
-if aantalToppings >= 1:
-    print("topping(s)     "+ str(aantalToppings)+ " X " + "€" + str(round(toppingKosten,2)))
+    if TotaalBakjes >= 1:
+        print("Bakje(s)       "+ str(TotaalBakjes)+ " X " + "€" + str(round(float(TotaalBakjes) * prijsPerBakje,2)))
+
+    if aantalToppings >= 1:
+        print("topping(s)     "+ str(aantalToppings)+ " X " + "€" + str(round(toppingKosten,2)))
+
+    print("                   ----- +")
+    totaalprijs = float(totaalHoorntjes) * prijsPerHoorntje + float(TotaalBakjes) * prijsPerBakje + TotaleBolletjes * prijsPerBolletje
+    totaal2 = round(float(totaalprijs),2)
+
+    print("Totaal"+ "              "+ "€" + str(totaal2))
+else:
+    print('---------["Papi Gelato"]---------')
+    print("")
+    totaalprijs = float(Liters_ijs) * float(prijsPerLiter)
+    totaalprijs2 = round(float(totaalprijs),2)
+    print("Liter   "+ str(Liters_ijs), " X "+ str(prijsPerLiter)+ " = "+"€"+ str(totaalprijs2))
+    print("                -------- +")
+    print("Totaal           = €"+ str(totaalprijs2))
+    btwprijs = round(float(totaalprijs/100 * Btw),2)
+    print("BTW  ("+ str(Btw) + "%)        = €"+ str(btwprijs))
 
 
-print("                   ----- +")
-totaalprijs = float(totaalHoorntjes) * prijsPerHoorntje + float(TotaalBakjes) * prijsPerBakje + TotaleBolletjes * prijsPerBolletje
-totaal2 = round(float(totaalprijs),2)
-
-print("Totaal"+ "              "+ "€" + str(totaal2))
