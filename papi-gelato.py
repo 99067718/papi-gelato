@@ -1,6 +1,6 @@
 from os import truncate
 
-
+aantal = 0
 herhalen = "y"
 repeat = True
 TotaalBakjes = 0
@@ -54,7 +54,7 @@ def topping():
                 toppingKosten += 0.50
             elif toppingKeuze == "sp" or "sprinkels":
                 
-                toppingKosten += 0.30
+                toppingKosten += (0.30 * aantal)
             elif toppingKeuze == "c" or "caramel":
                 if bakjeOfHoorntje == "bakje":
                     
@@ -87,8 +87,14 @@ def smaak():
 
 
 def aantalbolletjes():
-    aantalBolletjesijs = int(input("Hoe veel bolletjes ijs wil je?: "))
-    return aantalBolletjesijs
+    repeater = "enabled"
+    while repeater == "enabled":
+        aantalBolletjesijs = int(input("Hoe veel bolletjes ijs wil je?: "))
+        if aantal > 0:
+            repeater = "disabled"
+            return aantalBolletjesijs
+        else:
+            WrongAnswer()
 
 def WatVoorVerpakking():
     if aantal <= 3:
@@ -188,8 +194,9 @@ else:
     totaalprijs2 = round(float(totaalprijs),2)
     print("Liter   "+ str(Liters_ijs), " X "+ str(prijsPerLiter)+ " = "+"€"+ str(totaalprijs2))
     print("                -------- +")
-    print("Totaal           = €"+ str(totaalprijs2))
     btwprijs = round(float(totaalprijs/100 * Btw),2)
-    print("BTW  ("+ str(Btw) + "%)        = €"+ str(btwprijs))
+    print("Totaal           = €"+ str(totaalprijs2))
+    print(f'BTW               {round(totaalprijs2 / 106 * Btw, 2)}€')
+
 
 
